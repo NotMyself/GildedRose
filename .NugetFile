@@ -1,0 +1,4 @@
+install_to 'lib'
+nuget 'NUnit'
+nuget 'Shouldly'
+nuget 'NSubstitute'
