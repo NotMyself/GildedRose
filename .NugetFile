@@ -1,4 +1,4 @@
 install_to 'lib'
-nuget 'NUnit'
-nuget 'Shouldly'
-nuget 'NSubstitute'
+chew 'NUnit'
+chew 'NSubstitute'
+chew 'Giles'
