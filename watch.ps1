@@ -1,0 +1,1 @@
+.\lib\Giles.0.0.1.0\Giles.exe -s .\GildedRose.sln -t .\src\GildedRose.Tests\bin\debug\GildedRose.Tests.dll -p .\
