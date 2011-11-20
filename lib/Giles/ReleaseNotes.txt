@@ -1,0 +1,24 @@
+v.Next - Nov 6, 2011
+ - Fixed XUnit test project detection (Thanks Ian Davis!)
+ - No longer blocking Ctrl-C (GH-4)
+ - No longer setting the window size, buffer size, or position. Giles shouldn't be doing this
+ - Fixed issue with Giles not using the test assembly's app.config (GH-12)
+
+v0.1.1.3 - Oct 12, 2011
+ - Added E option to the interactive console to only print out the errors from the last test run, verbosely, including the stack traces
+ - Added Success and Failure icons to Growl notification - Thanks to Ian Davis for the idea.
+
+v0.1.1.2 - Sept 12, 2011
+ - Added x86 version of Giles to support testing of x86 target applications. A giles-x86.ps1 script has also been included to launch the x86 Giles instead of the AnyCPU version
+ - Added Giles version output to help window and to the console window title
+
+v0.1.1.1 - Sept 2, 2011
+ - Added giles.ps1 & init script. Now instead of having to run Giles manually from the nuget package, you just need to run giles.ps1 from the root of the solution. Giles will find the correct .sln files and start watching straight away.
+ - Added MIT license
+
+v0.1.1.0 - Sept 1, 2011
+ - Fixed Machine.Specification versioning issue where the test project needed to have the same version of mspec that Giles was using. Giles no longer has a dependancy on Machine.Specifications.dll, so we're version independent now!
+
+v0.1.0.2 - Aug 29, 2011
+ - Introduced Giles own runners instead of relying on console runners for each test framework
+ - The only command line option required now is the solution file to watch, the test assembly is determined automatically.  If Giles gets the test assembly incorrect, then you can specify the test assembly location with the -t parameter
