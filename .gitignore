@@ -16,3 +16,4 @@ _ReSharper*
 *.rej
 *.vs10x
 CI
+TestResult.xml
