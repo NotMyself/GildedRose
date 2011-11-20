@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NSubstitute">
-      <HintPath>..\..\lib\NSubstitute\lib\35\NSubstitute.dll</HintPath>
+      <HintPath>..\..\lib\NSubstitute\lib\NET35\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit\lib\nunit.framework.dll</HintPath>
@@ -44,6 +44,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestAssemblyTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GildedRose.Console\GildedRose.Console.csproj">
+      <Project>{F928CC23-1B56-46FD-B1F2-FEE28F2B424C}</Project>
+      <Name>GildedRose.Console</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
