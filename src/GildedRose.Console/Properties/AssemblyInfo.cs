@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("GildedRose.Console")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("DSHS")]
 [assembly: AssemblyProduct("GildedRose.Console")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCopyright("Copyright © DSHS 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e9060377-2c70-4804-8e64-7776cdb1ef12")]
+[assembly: Guid("99f174df-0709-4d59-bd90-f1d9f64fd023")]
 
 // Version information for an assembly consists of the following four values:
 //

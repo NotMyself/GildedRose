@@ -15,7 +15,7 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>7305184b</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>6612653f</NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -60,12 +60,6 @@
     <Compile Include="TestAssemblyTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GildedRose.Console\GildedRose.Console.csproj">
-      <Project>{F928CC23-1B56-46FD-B1F2-FEE28F2B424C}</Project>
-      <Name>GildedRose.Console</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -79,8 +73,10 @@
     <Error Condition="!Exists('..\..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.0.0\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.props'))" />
     <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.0.0\build\net20\xunit.runner.visualstudio.props'))" />
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets" Condition="Exists('..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
