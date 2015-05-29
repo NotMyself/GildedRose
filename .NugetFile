@@ -1,4 +1,0 @@
-install_to 'lib'
-chew 'NUnit'
-chew 'NSubstitute'
-chew 'Giles'

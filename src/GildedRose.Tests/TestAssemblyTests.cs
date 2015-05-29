@@ -1,14 +1,13 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace GildedRose.Tests
 {
-    [TestFixture]
     public class TestAssemblyTests
     {
-        [Test]
+        [Fact]
         public void TestTheTruth()
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
     }
 }
