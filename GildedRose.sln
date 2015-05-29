@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{B8B88B1C-EDE3-463E-AE8D-21A915B514F5}"
 	ProjectSection(SolutionItems) = preProject
-		psake.bat = psake.bat
+		build.bat = build.bat
 		tasks.ps1 = tasks.ps1
 	EndProjectSection
 EndProject
