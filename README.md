@@ -61,4 +61,4 @@ What & Why: [Refactor This: The Gilded Rose Kata](http://iamnotmyself.com/2011/0
 
 This work is by [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
 
-
+The repository can be found at [https://github.com/NotMyself/GildedRose](https://github.com/NotMyself/GildedRose)
