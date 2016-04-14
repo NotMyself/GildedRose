@@ -56,3 +56,9 @@ start refactoring.
 Who: [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
 
 What & Why: [Refactor This: The Gilded Rose Kata](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/)
+
+## License
+
+See attached file MIT-license.
+
+You can do what you want with it as long as you give attribution.
