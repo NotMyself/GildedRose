@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProgramTests.cs" />
+    <Compile Include="InventoryProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestAssemblyTests.cs" />
   </ItemGroup>
@@ -68,9 +68,9 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GildedRose.Console\GildedRose.Console.csproj">
-      <Project>{f2e879a9-7f1c-4c34-ab0d-2662f9815046}</Project>
-      <Name>GildedRose.Console</Name>
+    <ProjectReference Include="..\GildedRose.Inventory.Domain\GildedRose.Inventory.Domain.csproj">
+      <Project>{ea6f92f8-a267-4ab7-bf80-db037ed9743e}</Project>
+      <Name>GildedRose.Inventory.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
