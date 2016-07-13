@@ -12,82 +12,56 @@ namespace GildedRose.Inventory.Domain
         {
             for (var i = 0; i < items.Count; i++)
             {
-                UpdateQuality(items[i]);
+                UpdateQuality(items[i] as InventoryItem);
             }
         }
 
-        public void UpdateQuality(Item item)
+        public void UpdateQuality(InventoryItem item)
         {
-            if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
-            {
-                if (item.Quality > 0)
-                {
-                    if (item.Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-                }
-            }
-            else
-            {
-                if (item.Quality < 50)
-                {
-                    item.Quality = item.Quality + 1;
+            if (item.Type == ItemType.Deprecating)
+                UpdateDepreciatingItemQuality(item);
+            else if (item.Type == ItemType.Appreciating)
+                UpdateAppreciatingItemQuality(item);
+            else if (item.Type == ItemType.Fixed)
+                UpdateFixedItemQuality(item);
+            else if (item.Type == ItemType.AppreciatingTiered)
+                UpdateAppreciatingTieredItemQuality(item);
+        }
 
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        if (item.SellIn < 11)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-                        }
+        public void UpdateDepreciatingItemQuality(InventoryItem item)
+        {
+            item.SellIn--;
+            if (item.Quality > 0)
+                item.Quality -= item.SellIn > 0 ? 1 : 2;
+        }
 
-                        if (item.SellIn < 6)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
+        public void UpdateAppreciatingItemQuality(InventoryItem item)
+        {
+            item.SellIn--;
+            if (item.Quality < 50)
+                item.Quality += item.SellIn > 0 ? 1 : 2;
+        }
 
-            if (item.Name != "Sulfuras, Hand of Ragnaros")
-            {
-                item.SellIn = item.SellIn - 1;
-            }
+        public void UpdateFixedItemQuality(InventoryItem item)
+        {
+            //For now we do nothing for fixed items.
+        }
+
+        public void UpdateAppreciatingTieredItemQuality(InventoryItem item)
+        {
+            item.SellIn--;
 
             if (item.SellIn < 0)
+                item.Quality = 0;
+            else if (item.Quality < 50)
             {
-                if (item.Name != "Aged Brie")
-                {
-                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        if (item.Quality > 0)
-                        {
-                            if (item.Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                item.Quality = item.Quality - 1;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
-                }
+                if (item.SellIn <= 5)
+                    item.Quality += 3;
+                else if (item.SellIn <= 10)
+                    item.Quality += 2;
                 else
-                {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = item.Quality + 1;
-                    }
-                }
+                    item.Quality += 1;
             }
-            
         }
     }
 }

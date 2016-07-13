@@ -11,30 +11,30 @@ namespace GildedRose.Tests
     {
         private Item CreateStandardItem(int sellIn, int quality)
         {
-            Item item = new Item { Name = "+5 Dexterity Vest", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.Deprecating, Name = "+5 Dexterity Vest", SellIn = sellIn, Quality = quality };
             return item;
         }
 
         private Item CreateAppreciatingItem(int sellIn, int quality)
         {
-            Item item = new Item { Name = "Aged Brie", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.Appreciating, Name = "Aged Brie", SellIn = sellIn, Quality = quality };
             return item;
         }
 
         private Item CreateAppreciatingItemWithVariableQualityRate(int sellIn, int quality)
         {
-            Item item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.AppreciatingTiered, Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = quality };
             return item;
         }
 
         private Item CreateFixedQualityItem(int sellIn, int quality)
         {
-            Item item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.Fixed, Name = "Sulfuras, Hand of Ragnaros", SellIn = sellIn, Quality = quality };
             return item;
         }
 
         [Fact]
-        public void UpdateQualityTest_StandardItem()
+        public void UpdateQualityTest_StandardItem_BeforeSellByDate()
         {
             Item item = CreateStandardItem(10, 20);
 
@@ -46,7 +46,19 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_StandardItem_PastSellByDate()
+        public void UpdateQualityTest_StandardItem_BeforeSellByDate_MinQualityReached()
+        {
+            Item item = CreateStandardItem(6, 0);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(5, item.SellIn);
+            Assert.Equal(0, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_StandardItem_AfterSellByDate()
         {
             Item item = CreateStandardItem(-1, 20);
 
@@ -58,7 +70,7 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_StandardItem_PastSellByDate_NoQualityRemaining()
+        public void UpdateQualityTest_StandardItem_AfterSellByDate_MinQualityReached()
         {
             Item item = CreateStandardItem(-1, 0);
 
@@ -70,7 +82,7 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_AppreciatingItem()
+        public void UpdateQualityTest_AppreciatingItem_BeforeSellByDate()
         {
             Item item = CreateAppreciatingItem(2, 0);
 
@@ -82,7 +94,7 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_AppreciatingItem_MaxQuality()
+        public void UpdateQualityTest_AppreciatingItem_BeforeSellByDate_MaxQualityReached()
         {
             Item item = CreateAppreciatingItem(2, 50);
 
@@ -94,7 +106,31 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_AppreciatingItem_VariableQualityRate_Tier1()
+        public void UpdateQualityTest_AppreciatingItem_AfterSellByDate()
+        {
+            Item item = CreateAppreciatingItem(-1, 0);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(-2, item.SellIn);
+            Assert.Equal(2, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_AppreciatingItem_AfterSellByDate_MaxQualityReached()
+        {
+            Item item = CreateAppreciatingItem(-1, 50);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(-2, item.SellIn);
+            Assert.Equal(50, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_AppreciatingItem_VariableQualityRate_BeforeSellByDate_Tier1()
         {
             Item item = CreateAppreciatingItemWithVariableQualityRate(15, 20);
 
@@ -106,7 +142,7 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_AppreciatingItem_VariableQualityRate_Tier2()
+        public void UpdateQualityTest_AppreciatingItem_VariableQualityRate_BeforeSellByDate_Tier2()
         {
             Item item = CreateAppreciatingItemWithVariableQualityRate(9, 20);
 
@@ -118,7 +154,7 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_AppreciatingItem_VariableQualityRate_Tier3()
+        public void UpdateQualityTest_AppreciatingItem_VariableQualityRate_BeforeSellByDate_Tier3()
         {
             Item item = CreateAppreciatingItemWithVariableQualityRate(2, 20);
 
@@ -127,6 +163,18 @@ namespace GildedRose.Tests
 
             Assert.Equal(1, item.SellIn);
             Assert.Equal(23, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_AppreciatingItem_VariableQualityRate_AfterSellByDate()
+        {
+            Item item = CreateAppreciatingItemWithVariableQualityRate(-1, 20);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(-2, item.SellIn);
+            Assert.Equal(0, item.Quality);
         }
 
         [Fact]
