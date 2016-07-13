@@ -1,4 +1,5 @@
 ﻿using GildedRose.Inventory.Domain;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -11,25 +12,50 @@ namespace GildedRose.Tests
     {
         private Item CreateStandardItem(int sellIn, int quality)
         {
-            Item item = new InventoryItem { Type = ItemType.Deprecating, Name = "+5 Dexterity Vest", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.Deprecating, Name = "+5 Dexterity Vest", SellIn = sellIn, Quality = quality,
+                QualityAdjustmentRules =
+                {
+                    new Tuple<int?, int?, QualityAdjustment, int?>(null, -1, QualityAdjustment.Decrease, 2),
+                    new Tuple<int?, int?, QualityAdjustment, int?>(0, null, QualityAdjustment.Decrease, 1)
+                }
+            };
             return item;
         }
 
         private Item CreateAppreciatingItem(int sellIn, int quality)
         {
-            Item item = new InventoryItem { Type = ItemType.Appreciating, Name = "Aged Brie", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.Appreciating, Name = "Aged Brie", SellIn = sellIn, Quality = quality,
+                QualityAdjustmentRules =
+                {
+                    new Tuple<int?, int?, QualityAdjustment, int?>(null, -1, QualityAdjustment.Increase, 2),
+                    new Tuple<int?, int?, QualityAdjustment, int?>(0, null, QualityAdjustment.Increase, 1)
+                }
+            };
             return item;
         }
 
         private Item CreateAppreciatingItemWithVariableQualityRate(int sellIn, int quality)
         {
-            Item item = new InventoryItem { Type = ItemType.AppreciatingTiered, Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.AppreciatingTiered, Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = quality,
+                QualityAdjustmentRules =
+                {
+                    new Tuple<int?, int?, QualityAdjustment, int?>(null, -1, QualityAdjustment.ZeroOut, null),
+                    new Tuple<int?, int?, QualityAdjustment, int?>(0, 5, QualityAdjustment.Increase, 3),
+                    new Tuple<int?, int?, QualityAdjustment, int?>(6, 10, QualityAdjustment.Increase, 2),
+                    new Tuple<int?, int?, QualityAdjustment, int?>(11, null, QualityAdjustment.Increase, 1)
+                }
+            };
             return item;
         }
 
         private Item CreateFixedQualityItem(int sellIn, int quality)
         {
-            Item item = new InventoryItem { Type = ItemType.Fixed, Name = "Sulfuras, Hand of Ragnaros", SellIn = sellIn, Quality = quality };
+            Item item = new InventoryItem { Type = ItemType.Fixed, Name = "Sulfuras, Hand of Ragnaros", SellIn = sellIn, Quality = quality,
+                QualityAdjustmentRules =
+                {
+                    new Tuple<int?, int?, QualityAdjustment, int?>(null, null, QualityAdjustment.None, null)
+                }
+            };
             return item;
         }
 

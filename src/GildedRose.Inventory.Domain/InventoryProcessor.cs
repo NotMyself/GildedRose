@@ -12,56 +12,42 @@ namespace GildedRose.Inventory.Domain
         {
             for (var i = 0; i < items.Count; i++)
             {
-                UpdateQuality(items[i] as InventoryItem);
+                ProcessInventoryItem(items[i] as InventoryItem);
             }
         }
 
-        public void UpdateQuality(InventoryItem item)
+        public void ProcessInventoryItem(InventoryItem item)
         {
-            if (item.Type == ItemType.Deprecating)
-                UpdateDepreciatingItemQuality(item);
-            else if (item.Type == ItemType.Appreciating)
-                UpdateAppreciatingItemQuality(item);
-            else if (item.Type == ItemType.Fixed)
-                UpdateFixedItemQuality(item);
-            else if (item.Type == ItemType.AppreciatingTiered)
-                UpdateAppreciatingTieredItemQuality(item);
+            UpdateSellIn(item);
+
+            var qualityAdjRule = GetQualityAdjustmentRule(item);
+
+            UpdateQuality(item, qualityAdjRule);
         }
 
-        public void UpdateDepreciatingItemQuality(InventoryItem item)
+        private void UpdateSellIn(InventoryItem item)
         {
-            item.SellIn--;
-            if (item.Quality > 0)
-                item.Quality -= item.SellIn > 0 ? 1 : 2;
+            if (item.Type != ItemType.Fixed)
+                item.SellIn--;
         }
 
-        public void UpdateAppreciatingItemQuality(InventoryItem item)
+        private Tuple<int?, int?, QualityAdjustment, int?> GetQualityAdjustmentRule(InventoryItem item)
         {
-            item.SellIn--;
-            if (item.Quality < 50)
-                item.Quality += item.SellIn > 0 ? 1 : 2;
+            var qualityAdjRule = item.QualityAdjustmentRules.First(
+                r =>
+                (r.Item1 == null || r.Item1.Value <= item.SellIn) &&
+                (r.Item2 == null || r.Item2.Value >= item.SellIn));
+            return qualityAdjRule;
         }
 
-        public void UpdateFixedItemQuality(InventoryItem item)
+        private void UpdateQuality(InventoryItem item, Tuple<int?, int?, QualityAdjustment, int?> qualityAdjRule)
         {
-            //For now we do nothing for fixed items.
-        }
-
-        public void UpdateAppreciatingTieredItemQuality(InventoryItem item)
-        {
-            item.SellIn--;
-
-            if (item.SellIn < 0)
+            if (qualityAdjRule.Item3 == QualityAdjustment.Increase && item.Quality < 50)
+                item.Quality += qualityAdjRule.Item4.Value;
+            else if (qualityAdjRule.Item3 == QualityAdjustment.Decrease && item.Quality > 0)
+                item.Quality -= qualityAdjRule.Item4.Value;
+            else if (qualityAdjRule.Item3 == QualityAdjustment.ZeroOut)
                 item.Quality = 0;
-            else if (item.Quality < 50)
-            {
-                if (item.SellIn <= 5)
-                    item.Quality += 3;
-                else if (item.SellIn <= 10)
-                    item.Quality += 2;
-                else
-                    item.Quality += 1;
-            }
         }
     }
 }

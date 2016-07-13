@@ -14,4 +14,12 @@ namespace GildedRose.Inventory.Domain
         DeprecatingTiered = 3,
         AppreciatingTiered = 4
     }
+
+    public enum QualityAdjustment
+    {
+        None = 0,
+        Decrease = 1,
+        Increase = 2,
+        ZeroOut = 3
+    }
 }
