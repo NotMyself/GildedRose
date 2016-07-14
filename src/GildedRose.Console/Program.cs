@@ -1,5 +1,4 @@
-﻿using GildedRose.Inventory.Domain;
-using GildedRose.Inventory.Domain.Entities;
+﻿using GildedRose.Inventory.Domain.Entities;
 using GildedRose.Inventory.Domain.Logic;
 using System.Collections.Generic;
 

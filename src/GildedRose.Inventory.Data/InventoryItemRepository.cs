@@ -1,14 +1,15 @@
 ﻿using GildedRose.Inventory.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GildedRose.Inventory.Data
 {
     public class InventoryItemRepository
     {
+        public InventoryItemRepository()
+            : base()
+        {
+        }
+
         public List<Item> LoadInventoryItems()
         {
             List<Item> inventoryItems = new List<Item>()

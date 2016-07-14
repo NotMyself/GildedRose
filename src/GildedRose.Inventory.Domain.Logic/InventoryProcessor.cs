@@ -1,9 +1,6 @@
 ﻿using GildedRose.Inventory.Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GildedRose.Inventory.Domain.Logic
 {
@@ -11,6 +8,11 @@ namespace GildedRose.Inventory.Domain.Logic
     {
         private const int MIN_QUALITY = 0;
         private const int MAX_QUALITY = 50;
+
+        public InventoryProcessor()
+            : base()
+        {
+        }
 
         public void UpdateQuality(IList<Item> items)
         {

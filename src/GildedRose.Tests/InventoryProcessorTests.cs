@@ -1,7 +1,5 @@
-﻿using GildedRose.Inventory.Domain;
-using GildedRose.Inventory.Domain.Entities;
+﻿using GildedRose.Inventory.Domain.Entities;
 using GildedRose.Inventory.Domain.Logic;
-using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -12,6 +10,11 @@ namespace GildedRose.Tests
     /// </summary>
     public class InventoryProcessorTests
     {
+        public InventoryProcessorTests()
+            : base()
+        {
+        }
+
         private Item CreateDepreciatingItem(int sellIn, int quality)
         {
             Item item = new InventoryItem { Type = ItemType.Deprecating, Name = "+5 Dexterity Vest", SellIn = sellIn, Quality = quality,

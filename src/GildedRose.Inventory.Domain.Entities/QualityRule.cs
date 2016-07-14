@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GildedRose.Inventory.Domain.Entities
 {
     public class QualityRule
     {
+        public QualityRule()
+            : base()
+        {
+        }
+
         public int? MinSellIn { get; set; }
         public int? MaxSellIn { get; set; }
         public QualityAdjustment Adjustment { get; set; }
