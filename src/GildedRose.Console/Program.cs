@@ -1,4 +1,5 @@
 ﻿using GildedRose.Inventory.Domain.Entities;
+using GildedRose.Inventory.Domain.Entities.Validation;
 using GildedRose.Inventory.Domain.Logic;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,12 @@ namespace GildedRose.Console
                 UpdateQuality();
                 PrintItems("Inventory items after processing:", Items);
             }
+            catch (ValidationException ex)
+            {
+                System.Console.WriteLine("\nInvalid inventory items were found while attempting to process inventory: {0}", ex.Message);
+            }
             catch (Exception ex)
             {
-                //Simple error handling to display details to user.
                 System.Console.WriteLine("\nAn error occurred while attempting to process inventory: {0}", ex.Message);
             }
 
