@@ -1,12 +1,13 @@
-﻿using System;
+﻿using GildedRose.Inventory.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GildedRose.Inventory.Domain
+namespace GildedRose.Inventory.Data
 {
-    public class InventoryLoader
+    public class InventoryItemRepository
     {
         public List<Item> LoadInventoryItems()
         {

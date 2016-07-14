@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GildedRose.Inventory.Domain
+namespace GildedRose.Inventory.Domain.Entities
 {
     public class QualityRule
     {

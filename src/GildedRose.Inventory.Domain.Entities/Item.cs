@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GildedRose.Inventory.Domain
+namespace GildedRose.Inventory.Domain.Entities
 {
     /// <summary>
     /// Represents an inventory item.
