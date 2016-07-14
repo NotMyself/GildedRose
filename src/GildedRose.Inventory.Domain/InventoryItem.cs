@@ -16,5 +16,10 @@ namespace GildedRose.Inventory.Domain
 
         public ItemType Type { get; set; }
         public List<QualityRule> QualityRules { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0} - Quality={1}, SellIn={2}", Name, Quality, SellIn);
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace GildedRose.Tests
         private Item CreateDoubleRateDepreciatingItem(int sellIn, int quality)
         {
             Item item = CreateDepreciatingItem(sellIn, quality);
-            item.Name = "Conjured";
+            item.Name = "Conjured Mana Cake";
             foreach (var qualityRule in ((InventoryItem)item).QualityRules)
                 qualityRule.Rate *= 2;
             return item;
