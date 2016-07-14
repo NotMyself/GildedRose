@@ -10,7 +10,7 @@ namespace GildedRose.Tests
     /// </summary>
     public class InventoryProcessorTests
     {
-        private Item CreateStandardItem(int sellIn, int quality)
+        private Item CreateDepreciatingItem(int sellIn, int quality)
         {
             Item item = new InventoryItem { Type = ItemType.Deprecating, Name = "+5 Dexterity Vest", SellIn = sellIn, Quality = quality,
                 QualityRules =
@@ -19,6 +19,15 @@ namespace GildedRose.Tests
                     new QualityRule() { MinSellIn = 0, MaxSellIn = null, Adjustment = QualityAdjustment.Decrease, Rate = 1 }
                 }
             };
+            return item;
+        }
+
+        private Item CreateDoubleRateDepreciatingItem(int sellIn, int quality)
+        {
+            Item item = CreateDepreciatingItem(sellIn, quality);
+            item.Name = "Conjured";
+            foreach (var qualityRule in ((InventoryItem)item).QualityRules)
+                qualityRule.Rate *= 2;
             return item;
         }
 
@@ -60,9 +69,9 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_StandardItem_BeforeSellByDate()
+        public void UpdateQualityTest_DepreciatingItem_BeforeSellByDate()
         {
-            Item item = CreateStandardItem(10, 20);
+            Item item = CreateDepreciatingItem(10, 20);
 
             InventoryProcessor inventoryProcessor = new InventoryProcessor();
             inventoryProcessor.UpdateQuality(new List<Item>() { item });
@@ -72,9 +81,9 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_StandardItem_BeforeSellByDate_MinQualityReached()
+        public void UpdateQualityTest_DepreciatingItem_BeforeSellByDate_MinQualityReached()
         {
-            Item item = CreateStandardItem(6, 0);
+            Item item = CreateDepreciatingItem(6, 0);
 
             InventoryProcessor inventoryProcessor = new InventoryProcessor();
             inventoryProcessor.UpdateQuality(new List<Item>() { item });
@@ -84,9 +93,9 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_StandardItem_AfterSellByDate()
+        public void UpdateQualityTest_DepreciatingItem_AfterSellByDate()
         {
-            Item item = CreateStandardItem(-1, 20);
+            Item item = CreateDepreciatingItem(-1, 20);
 
             InventoryProcessor inventoryProcessor = new InventoryProcessor();
             inventoryProcessor.UpdateQuality(new List<Item>() { item });
@@ -96,9 +105,57 @@ namespace GildedRose.Tests
         }
 
         [Fact]
-        public void UpdateQualityTest_StandardItem_AfterSellByDate_MinQualityReached()
+        public void UpdateQualityTest_DepreciatingItem_AfterSellByDate_MinQualityReached()
         {
-            Item item = CreateStandardItem(-1, 0);
+            Item item = CreateDepreciatingItem(-1, 0);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(-2, item.SellIn);
+            Assert.Equal(0, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_DepreciatingItem_DoubleRate_BeforeSellByDate()
+        {
+            Item item = CreateDoubleRateDepreciatingItem(10, 20);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(9, item.SellIn);
+            Assert.Equal(18, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_DepreciatingItem_DoubleRate_BeforeSellByDate_MinQualityReached()
+        {
+            Item item = CreateDoubleRateDepreciatingItem(6, 0);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(5, item.SellIn);
+            Assert.Equal(0, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_DepreciatingItem_DoubleRate_AfterSellByDate()
+        {
+            Item item = CreateDoubleRateDepreciatingItem(-1, 20);
+
+            InventoryProcessor inventoryProcessor = new InventoryProcessor();
+            inventoryProcessor.UpdateQuality(new List<Item>() { item });
+
+            Assert.Equal(-2, item.SellIn);
+            Assert.Equal(16, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQualityTest_DepreciatingItem_DoubleRate_AfterSellByDate_MinQualityReached()
+        {
+            Item item = CreateDoubleRateDepreciatingItem(-1, 0);
 
             InventoryProcessor inventoryProcessor = new InventoryProcessor();
             inventoryProcessor.UpdateQuality(new List<Item>() { item });
