@@ -13,10 +13,10 @@ namespace GildedRose.Tests
         private Item CreateStandardItem(int sellIn, int quality)
         {
             Item item = new InventoryItem { Type = ItemType.Deprecating, Name = "+5 Dexterity Vest", SellIn = sellIn, Quality = quality,
-                QualityAdjustmentRules =
+                QualityRules =
                 {
-                    new Tuple<int?, int?, QualityAdjustment, int?>(null, -1, QualityAdjustment.Decrease, 2),
-                    new Tuple<int?, int?, QualityAdjustment, int?>(0, null, QualityAdjustment.Decrease, 1)
+                    new QualityRule() { MinSellIn = null, MaxSellIn = -1, Adjustment = QualityAdjustment.Decrease, Rate = 2 },
+                    new QualityRule() { MinSellIn = 0, MaxSellIn = null, Adjustment = QualityAdjustment.Decrease, Rate = 1 }
                 }
             };
             return item;
@@ -25,10 +25,10 @@ namespace GildedRose.Tests
         private Item CreateAppreciatingItem(int sellIn, int quality)
         {
             Item item = new InventoryItem { Type = ItemType.Appreciating, Name = "Aged Brie", SellIn = sellIn, Quality = quality,
-                QualityAdjustmentRules =
+                QualityRules =
                 {
-                    new Tuple<int?, int?, QualityAdjustment, int?>(null, -1, QualityAdjustment.Increase, 2),
-                    new Tuple<int?, int?, QualityAdjustment, int?>(0, null, QualityAdjustment.Increase, 1)
+                    new QualityRule() { MinSellIn = null, MaxSellIn = -1, Adjustment = QualityAdjustment.Increase, Rate = 2 },
+                    new QualityRule() { MinSellIn = 0, MaxSellIn = null, Adjustment = QualityAdjustment.Increase, Rate = 1 }
                 }
             };
             return item;
@@ -37,12 +37,12 @@ namespace GildedRose.Tests
         private Item CreateAppreciatingItemWithVariableQualityRate(int sellIn, int quality)
         {
             Item item = new InventoryItem { Type = ItemType.AppreciatingTiered, Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = quality,
-                QualityAdjustmentRules =
+                QualityRules =
                 {
-                    new Tuple<int?, int?, QualityAdjustment, int?>(null, -1, QualityAdjustment.ZeroOut, null),
-                    new Tuple<int?, int?, QualityAdjustment, int?>(0, 5, QualityAdjustment.Increase, 3),
-                    new Tuple<int?, int?, QualityAdjustment, int?>(6, 10, QualityAdjustment.Increase, 2),
-                    new Tuple<int?, int?, QualityAdjustment, int?>(11, null, QualityAdjustment.Increase, 1)
+                    new QualityRule() { MinSellIn = null, MaxSellIn = -1, Adjustment = QualityAdjustment.SetToMin, Rate = null },
+                    new QualityRule() { MinSellIn = 0, MaxSellIn = 5, Adjustment = QualityAdjustment.Increase, Rate = 3 },
+                    new QualityRule() { MinSellIn = 6, MaxSellIn = 10, Adjustment = QualityAdjustment.Increase, Rate = 2 },
+                    new QualityRule() { MinSellIn = 11, MaxSellIn = null, Adjustment = QualityAdjustment.Increase, Rate = 1 }
                 }
             };
             return item;
@@ -51,9 +51,9 @@ namespace GildedRose.Tests
         private Item CreateFixedQualityItem(int sellIn, int quality)
         {
             Item item = new InventoryItem { Type = ItemType.Fixed, Name = "Sulfuras, Hand of Ragnaros", SellIn = sellIn, Quality = quality,
-                QualityAdjustmentRules =
+                QualityRules =
                 {
-                    new Tuple<int?, int?, QualityAdjustment, int?>(null, null, QualityAdjustment.None, null)
+                    new QualityRule() { MinSellIn = null, MaxSellIn = null, Adjustment = QualityAdjustment.None, Rate = null }
                 }
             };
             return item;

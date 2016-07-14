@@ -20,6 +20,6 @@ namespace GildedRose.Inventory.Domain
         None = 0,
         Decrease = 1,
         Increase = 2,
-        ZeroOut = 3
+        SetToMin = 3
     }
 }

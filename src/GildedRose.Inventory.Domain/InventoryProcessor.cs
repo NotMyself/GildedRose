@@ -8,6 +8,9 @@ namespace GildedRose.Inventory.Domain
 {
     public class InventoryProcessor
     {
+        private const int MIN_QUALITY = 0;
+        private const int MAX_QUALITY = 50;
+
         public void UpdateQuality(IList<Item> items)
         {
             for (var i = 0; i < items.Count; i++)
@@ -20,9 +23,9 @@ namespace GildedRose.Inventory.Domain
         {
             UpdateSellIn(item);
 
-            var qualityAdjRule = GetQualityAdjustmentRule(item);
+            var qualityRule = GetQualityRule(item);
 
-            UpdateQuality(item, qualityAdjRule);
+            UpdateQuality(item, qualityRule);
         }
 
         private void UpdateSellIn(InventoryItem item)
@@ -31,23 +34,23 @@ namespace GildedRose.Inventory.Domain
                 item.SellIn--;
         }
 
-        private Tuple<int?, int?, QualityAdjustment, int?> GetQualityAdjustmentRule(InventoryItem item)
+        private QualityRule GetQualityRule(InventoryItem item)
         {
-            var qualityAdjRule = item.QualityAdjustmentRules.First(
+            var qualityRule = item.QualityRules.First(
                 r =>
-                (r.Item1 == null || r.Item1.Value <= item.SellIn) &&
-                (r.Item2 == null || r.Item2.Value >= item.SellIn));
-            return qualityAdjRule;
+                (r.MinSellIn == null || r.MinSellIn.Value <= item.SellIn) &&
+                (r.MaxSellIn == null || r.MaxSellIn.Value >= item.SellIn));
+            return qualityRule;
         }
 
-        private void UpdateQuality(InventoryItem item, Tuple<int?, int?, QualityAdjustment, int?> qualityAdjRule)
+        private void UpdateQuality(InventoryItem item, QualityRule qualityRule)
         {
-            if (qualityAdjRule.Item3 == QualityAdjustment.Increase && item.Quality < 50)
-                item.Quality += qualityAdjRule.Item4.Value;
-            else if (qualityAdjRule.Item3 == QualityAdjustment.Decrease && item.Quality > 0)
-                item.Quality -= qualityAdjRule.Item4.Value;
-            else if (qualityAdjRule.Item3 == QualityAdjustment.ZeroOut)
-                item.Quality = 0;
+            if (qualityRule.Adjustment == QualityAdjustment.Increase && item.Quality < MAX_QUALITY)
+                item.Quality += qualityRule.Rate.Value;
+            else if (qualityRule.Adjustment == QualityAdjustment.Decrease && item.Quality > MIN_QUALITY)
+                item.Quality -= qualityRule.Rate.Value;
+            else if (qualityRule.Adjustment == QualityAdjustment.SetToMin)
+                item.Quality = MIN_QUALITY;
         }
     }
 }

@@ -11,10 +11,10 @@ namespace GildedRose.Inventory.Domain
         public InventoryItem()
             : base()
         {
-            QualityAdjustmentRules = new List<Tuple<int?, int?, QualityAdjustment, int?>>();
+            QualityRules = new List<QualityRule>();
         }
 
         public ItemType Type { get; set; }
-        public List<Tuple<int?, int?, QualityAdjustment, int?>> QualityAdjustmentRules { get; set; }
+        public List<QualityRule> QualityRules { get; set; }
     }
 }
