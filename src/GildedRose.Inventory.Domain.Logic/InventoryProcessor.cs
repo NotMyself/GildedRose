@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace GildedRose.Inventory.Domain.Logic
 {
+    /// <summary>
+    /// Responsible for processing inventory items as they age to reflect changes in quality and days left to sell.
+    /// </summary>
     public class InventoryProcessor
     {
         private const int MIN_QUALITY = 0;

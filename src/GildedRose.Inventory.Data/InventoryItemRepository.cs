@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace GildedRose.Inventory.Data
 {
+    /// <summary>
+    /// Responsible for all data access for inventory items.
+    /// </summary>
     public class InventoryItemRepository
     {
         public InventoryItemRepository()

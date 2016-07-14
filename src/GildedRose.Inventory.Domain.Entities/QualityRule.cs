@@ -2,6 +2,9 @@
 
 namespace GildedRose.Inventory.Domain.Entities
 {
+    /// <summary>
+    /// Represents a rule that indicates how an inventory item's quality behaves over time.
+    /// </summary>
     public class QualityRule
     {
         public QualityRule()

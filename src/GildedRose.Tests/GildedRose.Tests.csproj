@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="InventoryProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestAssemblyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

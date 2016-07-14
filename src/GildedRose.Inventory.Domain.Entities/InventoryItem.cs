@@ -2,6 +2,9 @@
 
 namespace GildedRose.Inventory.Domain.Entities
 {
+    /// <summary>
+    /// Represents an inventory item.
+    /// </summary>
     public class InventoryItem : Item
     {
         public InventoryItem()

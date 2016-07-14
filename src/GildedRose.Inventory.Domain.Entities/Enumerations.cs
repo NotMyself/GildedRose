@@ -2,6 +2,9 @@
 
 namespace GildedRose.Inventory.Domain.Entities
 {
+    /// <summary>
+    /// The type of inventory item, with respect to its behavior over time.
+    /// </summary>
     public enum ItemType
     {
         Deprecating = 0,
@@ -11,6 +14,9 @@ namespace GildedRose.Inventory.Domain.Entities
         AppreciatingTiered = 4
     }
 
+    /// <summary>
+    /// The adjustments that can be made to an inventory item's quality.
+    /// </summary>
     public enum QualityAdjustment
     {
         None = 0,

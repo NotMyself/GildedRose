@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace GildedRose.Inventory.Domain.Logic
 {
+    /// <summary>
+    /// Responsible for loading inventory items from an external source.
+    /// </summary>
     public class InventoryLoader
     {
         public InventoryLoader()
