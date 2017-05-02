@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Tests", "src\GildedRose.Tests\GildedRose.Tests.csproj", "{CD4715A2-532E-4C74-BC40-36EE64F61FCA}"
 EndProject
@@ -26,6 +26,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{B8B88B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Console", "src\GildedRose.Console\GildedRose.Console.csproj", "{F2E879A9-7F1C-4C34-AB0D-2662F9815046}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Inventory.Data", "src\GildedRose.Inventory.Data\GildedRose.Inventory.Data.csproj", "{6AC13627-6DB3-4E89-B44F-A3515A2C448D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Inventory.Domain.Logic", "src\GildedRose.Inventory.Domain.Logic\GildedRose.Inventory.Domain.Logic.csproj", "{60BF3CEE-BAB4-418F-85DB-1CCFC91C4C2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Inventory.Domain.Entities", "src\GildedRose.Inventory.Domain.Entities\GildedRose.Inventory.Domain.Entities.csproj", "{AA41A0CC-CCF3-4C87-9321-41CDACFFA4F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +46,18 @@ Global
 		{F2E879A9-7F1C-4C34-AB0D-2662F9815046}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2E879A9-7F1C-4C34-AB0D-2662F9815046}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2E879A9-7F1C-4C34-AB0D-2662F9815046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AC13627-6DB3-4E89-B44F-A3515A2C448D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC13627-6DB3-4E89-B44F-A3515A2C448D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC13627-6DB3-4E89-B44F-A3515A2C448D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC13627-6DB3-4E89-B44F-A3515A2C448D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BF3CEE-BAB4-418F-85DB-1CCFC91C4C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60BF3CEE-BAB4-418F-85DB-1CCFC91C4C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60BF3CEE-BAB4-418F-85DB-1CCFC91C4C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60BF3CEE-BAB4-418F-85DB-1CCFC91C4C2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA41A0CC-CCF3-4C87-9321-41CDACFFA4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA41A0CC-CCF3-4C87-9321-41CDACFFA4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA41A0CC-CCF3-4C87-9321-41CDACFFA4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA41A0CC-CCF3-4C87-9321-41CDACFFA4F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -57,14 +57,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InventoryProcessorTests.cs" />
+    <Compile Include="InventoryTestUtility.cs" />
+    <Compile Include="InventoryValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestAssemblyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GildedRose.Inventory.Domain.Entities\GildedRose.Inventory.Domain.Entities.csproj">
+      <Project>{aa41a0cc-ccf3-4c87-9321-41cdacffa4f6}</Project>
+      <Name>GildedRose.Inventory.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GildedRose.Inventory.Domain.Logic\GildedRose.Inventory.Domain.Logic.csproj">
+      <Project>{60bf3cee-bab4-418f-85db-1ccfc91c4c2b}</Project>
+      <Name>GildedRose.Inventory.Domain.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
