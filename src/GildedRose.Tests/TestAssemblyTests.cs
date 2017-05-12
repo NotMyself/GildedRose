@@ -86,5 +86,60 @@ namespace GildedRose.Tests
             Assert.Equal(-1, Items[3].SellIn);
             Assert.Equal(0, Items[3].Quality);
         }
+
+        [Fact]
+        public void QualityDegradationBeforeSellByDate()
+        {
+            IList<Item> Items = new List<Item>
+            {
+                new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 10 },
+                new Item {Name = "Aged Brie", SellIn = 10, Quality = 10 },
+                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 },
+                new Item
+                        {
+                            Name = "Backstage passes to a TAFKAL80ETC concert",
+                            SellIn = 20,
+                            Quality = 20
+                        },
+                new Item
+                        {
+                            Name = "Backstage passes to a TAFKAL80ETC concert",
+                            SellIn = 10,
+                            Quality = 20
+                        },
+                new Item
+                        {
+                            Name = "Backstage passes to a TAFKAL80ETC concert",
+                            SellIn = 5,
+                            Quality = 20
+                        }
+            };
+
+            Items = Program.UpdateQuality(Items);
+
+            // Normal item should degrade by 1
+            Assert.Equal(9, Items[0].SellIn);
+            Assert.Equal(9, Items[0].Quality);
+
+            // Aged Brie should increase by 1
+            Assert.Equal(9, Items[1].SellIn);
+            Assert.Equal(11, Items[1].Quality);
+
+            // Sulfuras quality and sell by is unchanged
+            Assert.Equal(0, Items[2].SellIn);
+            Assert.Equal(80, Items[2].Quality);
+
+            // Backstage passes with over 10 days life increase by 1 quality
+            Assert.Equal(19, Items[3].SellIn);
+            Assert.Equal(21, Items[3].Quality);
+
+            // Backstage passes with under 10 days life increase by 2 quality
+            Assert.Equal(9, Items[4].SellIn);
+            Assert.Equal(22, Items[4].Quality);
+
+            // Backstage passes with under 5 days life increase by 3 quality
+            Assert.Equal(4, Items[5].SellIn);
+            Assert.Equal(23, Items[5].Quality);
+        }
     }
 }
