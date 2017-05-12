@@ -38,77 +38,80 @@ namespace GildedRose.Console
         {
             foreach (Item currentItem in items)
             {
-                switch (currentItem.Name)
+                if (currentItem.Name.ToLower().Contains("aged brie"))
                 {
-                    case "Aged Brie":
-                        // Increase quality by 1 if before sell by
-                        if (currentItem.SellIn > 0)
-                        {
-                            currentItem.Quality = UpdateQualityBy(1, currentItem.Quality);
-                        }
-                        // Increase quality by 2 if after sell by
-                        else
-                        {
-                            currentItem.Quality = UpdateQualityBy(2, currentItem.Quality);
-                        }
+                    // Increase quality by 1 if before sell by
+                    if (currentItem.SellIn > 0)
+                    {
+                        currentItem.Quality = UpdateQualityBy(1, currentItem.Quality);
+                    }
+                    // Increase quality by 2 if after sell by
+                    else
+                    {
+                        currentItem.Quality = UpdateQualityBy(2, currentItem.Quality);
+                    }
 
-                        currentItem.SellIn--;
-                        break;
-                    case "Sulfuras, Hand of Ragnaros":
-                        // Don't need to do anything - sell in will always be 0, quality will always be 80
-                        continue;
-                    case "Backstage passes to a TAFKAL80ETC concert":
-                        // Increase quality by 1 if over 10 days from sell by
-                        if (currentItem.SellIn > 10)
-                        {
-                            currentItem.Quality = UpdateQualityBy(1, currentItem.Quality);
-                        }
-                        // Increase quality by 2 if between 5 and 10 days from sell by
-                        else if (currentItem.SellIn <= 10 && currentItem.SellIn > 5)
-                        {
-                            currentItem.Quality = UpdateQualityBy(2, currentItem.Quality);
-                        }
-                        // Increase quality by 3 if between 0 and 5 days form sell by
-                        else if (currentItem.SellIn <= 5 && currentItem.SellIn > 0)
-                        {
-                            currentItem.Quality = UpdateQualityBy(3, currentItem.Quality);
-                        }
-                        // Quality is always 0 after sell by
-                        else
-                        {
-                            currentItem.Quality = 0;
-                        }                        
+                    currentItem.SellIn--;
+                }
+                else if (currentItem.Name.ToLower().Contains("sulfuras"))
+                {
+                    // Don't need to do anything - sell in will always be 0, quality will always be 80
+                    continue;
+                }
+                else if (currentItem.Name.ToLower().Contains("backstage pass"))
+                {
+                    // Increase quality by 1 if over 10 days from sell by
+                    if (currentItem.SellIn > 10)
+                    {
+                        currentItem.Quality = UpdateQualityBy(1, currentItem.Quality);
+                    }
+                    // Increase quality by 2 if between 5 and 10 days from sell by
+                    else if (currentItem.SellIn <= 10 && currentItem.SellIn > 5)
+                    {
+                        currentItem.Quality = UpdateQualityBy(2, currentItem.Quality);
+                    }
+                    // Increase quality by 3 if between 0 and 5 days form sell by
+                    else if (currentItem.SellIn <= 5 && currentItem.SellIn > 0)
+                    {
+                        currentItem.Quality = UpdateQualityBy(3, currentItem.Quality);
+                    }
+                    // Quality is always 0 after sell by
+                    else
+                    {
+                        currentItem.Quality = 0;
+                    }
 
-                        currentItem.SellIn--;
-                        break;
-                    case "Conjured Mana Cake":
-                        // Decrease quality by 2 before sell by
-                        if (currentItem.SellIn > 0)
-                        {
-                            currentItem.Quality = UpdateQualityBy(-2, currentItem.Quality);
-                        }
-                        // Decrease quality by 4 after sell by
-                        else
-                        {
-                            currentItem.Quality = UpdateQualityBy(-4, currentItem.Quality);
-                        }
+                    currentItem.SellIn--;
+                }
+                else if (currentItem.Name.ToLower().Contains("conjured"))
+                {
+                    // Decrease quality by 2 before sell by
+                    if (currentItem.SellIn > 0)
+                    {
+                        currentItem.Quality = UpdateQualityBy(-2, currentItem.Quality);
+                    }
+                    // Decrease quality by 4 after sell by
+                    else
+                    {
+                        currentItem.Quality = UpdateQualityBy(-4, currentItem.Quality);
+                    }
 
-                        currentItem.SellIn--;
-                        break;
-                    default:
-                        // Decrease quality by 1 before sell by
-                        if (currentItem.SellIn > 0)
-                        {
-                            currentItem.Quality = UpdateQualityBy(-1, currentItem.Quality);
-                        }
-                        // Decrease quality by 2 before sell by
-                        else
-                        {
-                            currentItem.Quality = UpdateQualityBy(-2, currentItem.Quality);
-                        }
+                    currentItem.SellIn--;
+                }
+                else
+                {
+                    // Decrease quality by 1 before sell by
+                    if (currentItem.SellIn > 0)
+                    {
+                        currentItem.Quality = UpdateQualityBy(-1, currentItem.Quality);
+                    }
+                    // Decrease quality by 2 before sell by
+                    else
+                    {
+                        currentItem.Quality = UpdateQualityBy(-2, currentItem.Quality);
+                    }
 
-                        currentItem.SellIn--;
-                        break;
+                    currentItem.SellIn--;
                 }
             }
 
