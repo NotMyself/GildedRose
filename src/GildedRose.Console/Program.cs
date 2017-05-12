@@ -36,10 +36,8 @@ namespace GildedRose.Console
 
         public static IList<Item> UpdateQuality(IList<Item> items)
         {
-            for (var i = 0; i < items.Count; i++)
+            foreach (Item currentItem in items)
             {
-                Item currentItem = items[i];
-
                 switch (currentItem.Name)
                 {
                     case "Aged Brie":
