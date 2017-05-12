@@ -141,5 +141,75 @@ namespace GildedRose.Tests
             Assert.Equal(4, Items[5].SellIn);
             Assert.Equal(23, Items[5].Quality);
         }
+
+        [Fact]
+        public void QualityRange()
+        {
+            IList<Item> Items = new List<Item>
+            {
+                new Item {Name = "+5 Dexterity Vest", SellIn = 5, Quality = 0 },
+                new Item {Name = "+5 Dexterity Vest", SellIn = -1, Quality = 0 },
+            };
+
+            Items = Program.UpdateQuality(Items);
+
+            // Quality cannot be below 0 (check both before and after sell by date)
+            Assert.Equal(4, Items[0].SellIn);
+            Assert.Equal(0, Items[0].Quality);
+            
+            Assert.Equal(-2, Items[1].SellIn);
+            Assert.Equal(0, Items[1].Quality);
+
+            Items = new List<Item>
+            {
+                new Item {Name = "Aged Brie", SellIn = 10, Quality = 50 },
+                new Item {Name = "Aged Brie", SellIn = -1, Quality = 50 },
+                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 },
+                new Item
+                        {
+                            Name = "Backstage passes to a TAFKAL80ETC concert",
+                            SellIn = 20,
+                            Quality = 50
+                        },
+                new Item
+                        {
+                            Name = "Backstage passes to a TAFKAL80ETC concert",
+                            SellIn = 10,
+                            Quality = 50
+                        },
+                new Item
+                        {
+                            Name = "Backstage passes to a TAFKAL80ETC concert",
+                            SellIn = 5,
+                            Quality = 50
+                        }
+            };
+
+            Items = Program.UpdateQuality(Items);
+
+            // Quality cannot be above 50 (with the exception of Sulfurus)
+            // Check Aged Brie before and after sell by date
+            Assert.Equal(9, Items[0].SellIn);
+            Assert.Equal(50, Items[0].Quality);
+
+            Assert.Equal(-2, Items[1].SellIn);
+            Assert.Equal(50, Items[1].Quality);
+
+            // Sulfurus should never change anyway
+            Assert.Equal(0, Items[2].SellIn);
+            Assert.Equal(80, Items[2].Quality);
+
+            // Check Backstage passes for each of the different quality changes
+            Assert.Equal(19, Items[3].SellIn);
+            Assert.Equal(50, Items[3].Quality);
+            
+            Assert.Equal(9, Items[4].SellIn);
+            Assert.Equal(50, Items[4].Quality);
+            
+            Assert.Equal(4, Items[5].SellIn);
+            Assert.Equal(50, Items[5].Quality);
+
+
+        }
     }
 }
