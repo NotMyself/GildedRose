@@ -42,7 +42,7 @@ namespace GildedRose.Tests
             Assert.Equal(21, Items[4].Quality);
 
             Assert.Equal(2, Items[5].SellIn);
-            Assert.Equal(5, Items[5].Quality);
+            Assert.Equal(4, Items[5].Quality);
 
         }
 
@@ -59,7 +59,8 @@ namespace GildedRose.Tests
                             Name = "Backstage passes to a TAFKAL80ETC concert",
                             SellIn = 0,
                             Quality = 20
-                        }
+                        },
+                new Item {Name = "Conjured Mana Cake", SellIn = 0, Quality = 6}
             };
 
             Items = Program.UpdateQuality(Items);
@@ -79,6 +80,10 @@ namespace GildedRose.Tests
             // Backstage passes quality should be 0
             Assert.Equal(-1, Items[3].SellIn);
             Assert.Equal(0, Items[3].Quality);
+
+            // Conjured quality should decrease by 4
+            Assert.Equal(-1, Items[4].SellIn);
+            Assert.Equal(2, Items[4].Quality);
         }
 
         [Fact]
@@ -106,7 +111,8 @@ namespace GildedRose.Tests
                             Name = "Backstage passes to a TAFKAL80ETC concert",
                             SellIn = 5,
                             Quality = 20
-                        }
+                        },
+                new Item {Name = "Conjured Mana Cake", SellIn = 10, Quality = 10}
             };
 
             Items = Program.UpdateQuality(Items);
@@ -134,6 +140,10 @@ namespace GildedRose.Tests
             // Backstage passes with under 5 days life increase by 3 quality
             Assert.Equal(4, Items[5].SellIn);
             Assert.Equal(23, Items[5].Quality);
+
+            // Conjured quality should decrease by 2
+            Assert.Equal(9, Items[6].SellIn);
+            Assert.Equal(8, Items[6].Quality);
         }
 
         [Fact]
@@ -143,6 +153,8 @@ namespace GildedRose.Tests
             {
                 new Item {Name = "+5 Dexterity Vest", SellIn = 5, Quality = 0 },
                 new Item {Name = "+5 Dexterity Vest", SellIn = -1, Quality = 0 },
+                new Item {Name = "Conjured Mana Cake", SellIn = 5, Quality = 0},
+                new Item {Name = "Conjured Mana Cake", SellIn = -1, Quality = 0}
             };
 
             Items = Program.UpdateQuality(Items);
@@ -153,6 +165,12 @@ namespace GildedRose.Tests
             
             Assert.Equal(-2, Items[1].SellIn);
             Assert.Equal(0, Items[1].Quality);
+
+            Assert.Equal(4, Items[2].SellIn);
+            Assert.Equal(0, Items[2].Quality);
+
+            Assert.Equal(-2, Items[3].SellIn);
+            Assert.Equal(0, Items[3].Quality);
 
             Items = new List<Item>
             {

@@ -83,6 +83,20 @@ namespace GildedRose.Console
 
                         currentItem.SellIn--;
                         break;
+                    case "Conjured Mana Cake":
+                        // Decrease quality by 2 before sell by
+                        if (currentItem.SellIn > 0)
+                        {
+                            currentItem.Quality = UpdateQualityBy(-2, currentItem.Quality);
+                        }
+                        // Decrease quality by 4 after sell by
+                        else
+                        {
+                            currentItem.Quality = UpdateQualityBy(-4, currentItem.Quality);
+                        }
+
+                        currentItem.SellIn--;
+                        break;
                     default:
                         // Decrease quality by 1 before sell by
                         if (currentItem.SellIn > 0)
