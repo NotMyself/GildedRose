@@ -2,7 +2,7 @@
 
 namespace GildedRose.Console
 {
-    class Program
+    public class Program
     {
         IList<Item> Items;
         static void Main(string[] args)
@@ -28,86 +28,113 @@ namespace GildedRose.Console
 
                           };
 
-            app.UpdateQuality();
+            app.Items = UpdateQuality(app.Items);
 
             System.Console.ReadKey();
 
         }
 
-        public void UpdateQuality()
+        public static IList<Item> UpdateQuality(IList<Item> items)
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (Item currentItem in items)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (currentItem.Name.ToLower().Contains("aged brie"))
                 {
-                    if (Items[i].Quality > 0)
+                    // Increase quality by 1 if before sell by
+                    if (currentItem.SellIn > 0)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
+                        currentItem.Quality = UpdateQualityBy(1, currentItem.Quality);
                     }
+                    // Increase quality by 2 if after sell by
+                    else
+                    {
+                        currentItem.Quality = UpdateQualityBy(2, currentItem.Quality);
+                    }
+
+                    currentItem.SellIn--;
+                }
+                else if (currentItem.Name.ToLower().Contains("sulfuras"))
+                {
+                    // Don't need to do anything - sell in will always be 0, quality will always be 80
+                    continue;
+                }
+                else if (currentItem.Name.ToLower().Contains("backstage pass"))
+                {
+                    // Increase quality by 1 if over 10 days from sell by
+                    if (currentItem.SellIn > 10)
+                    {
+                        currentItem.Quality = UpdateQualityBy(1, currentItem.Quality);
+                    }
+                    // Increase quality by 2 if between 5 and 10 days from sell by
+                    else if (currentItem.SellIn <= 10 && currentItem.SellIn > 5)
+                    {
+                        currentItem.Quality = UpdateQualityBy(2, currentItem.Quality);
+                    }
+                    // Increase quality by 3 if between 0 and 5 days form sell by
+                    else if (currentItem.SellIn <= 5 && currentItem.SellIn > 0)
+                    {
+                        currentItem.Quality = UpdateQualityBy(3, currentItem.Quality);
+                    }
+                    // Quality is always 0 after sell by
+                    else
+                    {
+                        currentItem.Quality = 0;
+                    }
+
+                    currentItem.SellIn--;
+                }
+                else if (currentItem.Name.ToLower().Contains("conjured"))
+                {
+                    // Decrease quality by 2 before sell by
+                    if (currentItem.SellIn > 0)
+                    {
+                        currentItem.Quality = UpdateQualityBy(-2, currentItem.Quality);
+                    }
+                    // Decrease quality by 4 after sell by
+                    else
+                    {
+                        currentItem.Quality = UpdateQualityBy(-4, currentItem.Quality);
+                    }
+
+                    currentItem.SellIn--;
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    // Decrease quality by 1 before sell by
+                    if (currentItem.SellIn > 0)
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
-
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
+                        currentItem.Quality = UpdateQualityBy(-1, currentItem.Quality);
                     }
-                }
-
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
-
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != "Aged Brie")
-                    {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
-                    }
+                    // Decrease quality by 2 before sell by
                     else
                     {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        currentItem.Quality = UpdateQualityBy(-2, currentItem.Quality);
                     }
+
+                    currentItem.SellIn--;
                 }
             }
+
+            return items;
+        }
+
+        /// <summary>
+        /// Method to update quality whilst also handling quality range
+        /// </summary>
+        /// <param name="amount">The amount to increase the quality by</param>
+        /// <param name="currentQuality">The current quality value</param>
+        /// <returns>The new quality between 0 and 50</returns>
+        private static int UpdateQualityBy(int amount, int currentQuality)
+        {
+            currentQuality = currentQuality + amount;
+
+            if (currentQuality > 50)
+                return 50;
+
+            if (currentQuality < 0)
+                return 0;
+
+            return currentQuality;
         }
 
     }
