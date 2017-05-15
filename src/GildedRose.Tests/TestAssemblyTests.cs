@@ -152,9 +152,12 @@ namespace GildedRose.Tests
             IList<Item> Items = new List<Item>
             {
                 new Item {Name = "+5 Dexterity Vest", SellIn = 5, Quality = 0 },
+                new Item {Name = "+5 Dexterity Vest", SellIn = -1, Quality = 1 },
                 new Item {Name = "+5 Dexterity Vest", SellIn = -1, Quality = 0 },
                 new Item {Name = "Conjured Mana Cake", SellIn = 5, Quality = 0},
-                new Item {Name = "Conjured Mana Cake", SellIn = -1, Quality = 0}
+                new Item {Name = "Conjured Mana Cake", SellIn = 5, Quality = 1},
+                new Item {Name = "Conjured Mana Cake", SellIn = -1, Quality = 0},
+                new Item {Name = "Conjured Mana Cake", SellIn = -1, Quality = 3}
             };
 
             Items = Program.UpdateQuality(Items);
@@ -166,16 +169,26 @@ namespace GildedRose.Tests
             Assert.Equal(-2, Items[1].SellIn);
             Assert.Equal(0, Items[1].Quality);
 
-            Assert.Equal(4, Items[2].SellIn);
+            Assert.Equal(-2, Items[2].SellIn);
             Assert.Equal(0, Items[2].Quality);
 
-            Assert.Equal(-2, Items[3].SellIn);
+            Assert.Equal(4, Items[3].SellIn);
             Assert.Equal(0, Items[3].Quality);
+
+            Assert.Equal(4, Items[4].SellIn);
+            Assert.Equal(0, Items[4].Quality);
+
+            Assert.Equal(-2, Items[5].SellIn);
+            Assert.Equal(0, Items[5].Quality);
+
+            Assert.Equal(-2, Items[6].SellIn);
+            Assert.Equal(0, Items[6].Quality);
 
             Items = new List<Item>
             {
                 new Item {Name = "Aged Brie", SellIn = 10, Quality = 50 },
                 new Item {Name = "Aged Brie", SellIn = -1, Quality = 50 },
+                new Item {Name = "Aged Brie", SellIn = -1, Quality = 49 },
                 new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 },
                 new Item
                         {
@@ -187,13 +200,13 @@ namespace GildedRose.Tests
                         {
                             Name = "Backstage passes to a TAFKAL80ETC concert",
                             SellIn = 10,
-                            Quality = 50
+                            Quality = 49
                         },
                 new Item
                         {
                             Name = "Backstage passes to a TAFKAL80ETC concert",
                             SellIn = 5,
-                            Quality = 50
+                            Quality = 48
                         }
             };
 
@@ -207,19 +220,22 @@ namespace GildedRose.Tests
             Assert.Equal(-2, Items[1].SellIn);
             Assert.Equal(50, Items[1].Quality);
 
+            Assert.Equal(-2, Items[2].SellIn);
+            Assert.Equal(50, Items[2].Quality);
+
             // Sulfurus should never change anyway
-            Assert.Equal(0, Items[2].SellIn);
-            Assert.Equal(80, Items[2].Quality);
+            Assert.Equal(0, Items[3].SellIn);
+            Assert.Equal(80, Items[3].Quality);
 
             // Check Backstage passes for each of the different quality changes
-            Assert.Equal(19, Items[3].SellIn);
-            Assert.Equal(50, Items[3].Quality);
-            
-            Assert.Equal(9, Items[4].SellIn);
+            Assert.Equal(19, Items[4].SellIn);
             Assert.Equal(50, Items[4].Quality);
             
-            Assert.Equal(4, Items[5].SellIn);
+            Assert.Equal(9, Items[5].SellIn);
             Assert.Equal(50, Items[5].Quality);
+            
+            Assert.Equal(4, Items[6].SellIn);
+            Assert.Equal(50, Items[6].Quality);
 
 
         }
