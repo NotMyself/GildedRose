@@ -67,6 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DexterityVest.cs" />
+    <Compile Include="DexterityVestShould.cs" />
     <Compile Include="Items_Processor_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

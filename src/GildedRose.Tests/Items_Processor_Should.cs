@@ -11,7 +11,7 @@ namespace GildedRose.Tests
     public class ItemsProcessorShould
     {
         [Theory]
-        [InlineData("+5 Dexterity Vest", 10, 9, 20, 19)]
+        [InlineData("Aged Brie", 2, 1, 0, 1)]
         [InlineData("Aged Brie", 2, 1, 0, 1)]
         [InlineData("Elixir of the Mongoose", 5, 4, 7, 6)]
         [InlineData("Sulfuras, Hand of Ragnaros", 0, 0, 80, 80)]
@@ -25,6 +25,26 @@ namespace GildedRose.Tests
             var input = new List<Item>
             {
                 new Item {Name = itemName, SellIn = sellInInput, Quality = qualityInput}
+            };
+
+            //Act
+            var sut = new ItemsProcessor(input);
+
+            sut.UpdateQuality();
+
+            //Assert
+            sut.Items.Single().ShouldBeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Ensure_Backwards_Compatability_For_The_Items1()
+        {
+            //Arrange
+            var expected = new DexterityVestItem() { SellIn = 9, Quality = 19 };
+
+            var input = new List<Item>
+            {
+                new DexterityVestItem() { SellIn = 10, Quality = 20 }
             };
 
             //Act
