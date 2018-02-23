@@ -2,7 +2,7 @@
 
 namespace GildedRose.Console
 {
-    class Program
+    public class Program
     {
         IList<Item> Items;
         static void Main(string[] args)
@@ -28,13 +28,13 @@ namespace GildedRose.Console
 
                           };
 
-            app.UpdateQuality();
+            app.UpdateQuality(app.Items);
 
             System.Console.ReadKey();
 
         }
 
-        public void UpdateQuality()
+        public void UpdateQuality(IList<Item> Items)
         {
             for (var i = 0; i < Items.Count; i++)
             {
