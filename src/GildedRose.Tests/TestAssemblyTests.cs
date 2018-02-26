@@ -42,6 +42,22 @@ namespace GildedRose.Tests
         public void UpdateQuality_AgedBrie_IncreasesInQuality()
         {
             // Arrange
+            var item = new Item { Name = "Aged Brie", SellIn = 1, Quality = 20 };
+            var items = new List<Item> { item };
+            var p = new Program();
+
+            // Act
+            p.UpdateQuality(items);
+
+            //Assert
+            Assert.Equal(0, item.SellIn);
+            Assert.Equal(21, item.Quality);
+        }
+
+        [Fact]
+        public void UpdateQuality_AgedBrie_IncreasesInQualityTwice()
+        {
+            // Arrange
             var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 20 };
             var items = new List<Item> { item };
             var p = new Program();
@@ -53,6 +69,7 @@ namespace GildedRose.Tests
             Assert.Equal(-1, item.SellIn);
             Assert.Equal(22, item.Quality);
         }
+
 
         [Fact]
         public void UpdateQuality_ItemAlready50_DoesNotExceed50()
