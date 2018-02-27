@@ -57,12 +57,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgedRetailItemTests.cs" />
-    <Compile Include="PristineRetailItemTests.cs" />
+    <Compile Include="RetailItems\AgedRetailItemTests.cs" />
+    <Compile Include="RetailItems\ConjuredRetailItemTests.cs" />
+    <Compile Include="RetailItems\PristineRetailItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RetailItemFactoryTests.cs" />
-    <Compile Include="ScalpingRetailItemTestscs.cs" />
-    <Compile Include="StandardRetailItemTests.cs" />
+    <Compile Include="RetailItems\RetailItemFactoryTests.cs" />
+    <Compile Include="RetailItems\ScalpingRetailItemTestscs.cs" />
+    <Compile Include="RetailItems\StandardRetailItemTests.cs" />
     <Compile Include="TestAssemblyTests.cs" />
   </ItemGroup>
   <ItemGroup>

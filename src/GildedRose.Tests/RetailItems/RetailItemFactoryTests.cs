@@ -1,7 +1,8 @@
 ﻿using GildedRose.Console;
+using GildedRose.Console.RetailItems;
 using Xunit;
 
-namespace GildedRose.Tests
+namespace GildedRose.Tests.RetailItems
 {
     public class RetailItemFactoryTests
     {
@@ -45,5 +46,13 @@ namespace GildedRose.Tests
             Assert.IsType<StandardRetailItem>(result);
         }
 
+        [Fact]
+        public void CreateRetailItem_ConjuredItem_ReturnsConjuredRetailItem()
+        {
+            var item = new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6 };
+            var result = RetailItemFactory.CreateRetailItem(item);
+
+            Assert.IsType<ConjuredRetailItem>(result);
+        }
     }
 }

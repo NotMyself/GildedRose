@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GildedRose.Console.RetailItems;
+using System.Collections.Generic;
 
 namespace GildedRose.Console
 {

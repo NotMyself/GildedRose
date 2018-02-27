@@ -1,7 +1,8 @@
 ﻿using GildedRose.Console;
+using GildedRose.Console.RetailItems;
 using Xunit;
 
-namespace GildedRose.Tests
+namespace GildedRose.Tests.RetailItems
 {
     public class StandardRetailItemTests
     {
