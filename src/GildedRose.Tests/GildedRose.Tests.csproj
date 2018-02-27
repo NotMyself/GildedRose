@@ -57,7 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgedRetailItemTests.cs" />
+    <Compile Include="PristineRetailItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetailItemFactoryTests.cs" />
+    <Compile Include="ScalpingRetailItemTestscs.cs" />
+    <Compile Include="StandardRetailItemTests.cs" />
     <Compile Include="TestAssemblyTests.cs" />
   </ItemGroup>
   <ItemGroup>
