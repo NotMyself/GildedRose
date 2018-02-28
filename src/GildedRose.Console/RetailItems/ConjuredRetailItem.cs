@@ -4,16 +4,11 @@
     {
         public ConjuredRetailItem(Item item): base(item) { }
 
-        public override void UpdateQuality()
+        protected override void ReduceQuality()
         {
-            base.UpdateQuality();
-
-            ReduceQuality();
-
-            if (PastSellIn())
-            {
-                ReduceQuality();
-            }
+            base.ReduceQuality();
+            base.ReduceQuality();
         }
+
     }
 }
