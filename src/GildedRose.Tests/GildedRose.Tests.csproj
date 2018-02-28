@@ -40,6 +40,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FakeItEasy, Version=4.0.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FakeItEasy.4.5.1\lib\net45\FakeItEasy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +65,7 @@
     <Compile Include="RetailItems\PristineRetailItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetailItems\RetailItemFactoryTests.cs" />
+    <Compile Include="RetailItems\RetailItemTests.cs" />
     <Compile Include="RetailItems\ScalpingRetailItemTestscs.cs" />
     <Compile Include="RetailItems\StandardRetailItemTests.cs" />
     <Compile Include="TestAssemblyTests.cs" />
