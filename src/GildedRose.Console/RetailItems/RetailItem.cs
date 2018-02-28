@@ -16,21 +16,22 @@
             return Item.SellIn < 0;
         }
 
-        protected void ReduceQuality()
+        protected void ReduceQuality(int amount = 1)
         {
-            if (Item.Quality > 0)
+            Item.Quality = Item.Quality - amount;
+
+            if (Item.Quality < 0)
             {
-                {
-                    Item.Quality = Item.Quality - 1;
-                }
+                Item.Quality = 0;
             }
         }
 
-        protected void IncreaseQuality()
+        protected void IncreaseQuality(int amount = 1)
         {
-            if (Item.Quality < MaxQuality)
+            Item.Quality = Item.Quality + amount;
+            if (Item.Quality > MaxQuality)
             {
-                Item.Quality = Item.Quality + 1;
+                Item.Quality = MaxQuality;
             }
         }
 

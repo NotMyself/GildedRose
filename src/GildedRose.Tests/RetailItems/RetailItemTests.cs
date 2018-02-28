@@ -18,12 +18,12 @@ namespace GildedRose.Tests.RetailItems
         }
 
         [Fact]
-        public void ReduceQuality_QualityZero_RemainsZero()
+        public void ReduceQuality_ReduceBelowZero_RemainsZero()
         {
-            var item = new Item { Name = "Aged Brie", SellIn = 10, Quality = 0 };
+            var item = new Item { Name = "Aged Brie", SellIn = 10, Quality = 1 };
             var mockRetailItem = new MockRetailItem(item);
 
-            mockRetailItem.ReduceQuality();
+            mockRetailItem.ReduceQuality(3);
 
             Assert.Equal(0, item.Quality);
         }
@@ -31,21 +31,21 @@ namespace GildedRose.Tests.RetailItems
         [Fact]
         public void ReduceQuality_QualityAboveZero_ReducesQuality()
         {
-            var item = new Item { Name = "Aged Brie", SellIn = 10, Quality = 2 };
+            var item = new Item { Name = "Aged Brie", SellIn = 10, Quality = 3 };
             var mockRetailItem = new MockRetailItem(item);
 
-            mockRetailItem.ReduceQuality();
+            mockRetailItem.ReduceQuality(2);
 
             Assert.Equal(1, item.Quality);
         }
 
         [Fact]
-        public void IncreaseQuality_QualityFifty_RemainsFifty()
+        public void IncreaseQuality_IncreaseQualityAboveFifty_RemainsFifty()
         {
-            var item = new Item { Name = "Aged Brie", SellIn = 10, Quality = 50 };
+            var item = new Item { Name = "Aged Brie", SellIn = 10, Quality = 49 };
             var mockRetailItem = new MockRetailItem(item);
 
-            mockRetailItem.IncreaseQuality();
+            mockRetailItem.IncreaseQuality(2);
 
             Assert.Equal(50, item.Quality);
         }
@@ -56,9 +56,9 @@ namespace GildedRose.Tests.RetailItems
             var item = new Item { Name = "Aged Brie", SellIn = 10, Quality = 30 };
             var mockRetailItem = new MockRetailItem(item);
 
-            mockRetailItem.IncreaseQuality();
+            mockRetailItem.IncreaseQuality(3);
 
-            Assert.Equal(31, item.Quality);
+            Assert.Equal(33, item.Quality);
         }
 
         [Fact]
@@ -80,9 +80,9 @@ namespace GildedRose.Tests.RetailItems
 
             public new bool PastSellIn() => base.PastSellIn();
 
-            public new void ReduceQuality() => base.ReduceQuality();
+            public new void ReduceQuality(int amount) => base.ReduceQuality(amount);
 
-            public new void IncreaseQuality() => base.IncreaseQuality();
+            public new void IncreaseQuality(int amount) => base.IncreaseQuality(amount);
 
             public new void UpdateSellin() => base.UpdateSellIn();
 
