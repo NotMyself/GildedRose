@@ -41,8 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RetailItems\AgedRetailItem.cs" />
+    <Compile Include="RetailItems\ConjuredRetailItem.cs" />
+    <Compile Include="RetailItems\PristineRetailItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetailItems\RetailItem.cs" />
+    <Compile Include="RetailItems\RetailItemFactory.cs" />
+    <Compile Include="RetailItems\ScalpingRetailItem.cs" />
+    <Compile Include="RetailItems\StandardRetailItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
