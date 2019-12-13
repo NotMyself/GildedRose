@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GildedRose.Domain;
+using GildedRose.Domain.Models;
 
 namespace GildedRose.Console
 {
