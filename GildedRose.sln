@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Tests", "src\GildedRose.Tests\GildedRose.Tests.csproj", "{CD4715A2-532E-4C74-BC40-36EE64F61FCA}"
 EndProject
@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{B8B88B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Console", "src\GildedRose.Console\GildedRose.Console.csproj", "{F2E879A9-7F1C-4C34-AB0D-2662F9815046}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Domain", "GildedRose.Domain\GildedRose.Domain.csproj", "{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,8 +42,15 @@ Global
 		{F2E879A9-7F1C-4C34-AB0D-2662F9815046}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2E879A9-7F1C-4C34-AB0D-2662F9815046}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2E879A9-7F1C-4C34-AB0D-2662F9815046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A3FB7C8-CCE2-49C4-BC67-F0A510FBE179}
 	EndGlobalSection
 EndGlobal
