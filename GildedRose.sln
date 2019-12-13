@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Console", "src\G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Domain", "GildedRose.Domain\GildedRose.Domain.csproj", "{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRose.Logic", "GildedRose.Logic\GildedRose.Logic.csproj", "{C57BC309-3CDA-47BD-A740-255D34A520D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{169B5EFC-4A67-47C1-8AB9-D8DA3671E5DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57BC309-3CDA-47BD-A740-255D34A520D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57BC309-3CDA-47BD-A740-255D34A520D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57BC309-3CDA-47BD-A740-255D34A520D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57BC309-3CDA-47BD-A740-255D34A520D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
