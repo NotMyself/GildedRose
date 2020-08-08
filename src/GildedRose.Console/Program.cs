@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GildedRose.Console
 {
@@ -10,8 +11,8 @@ namespace GildedRose.Console
             System.Console.WriteLine("OMGHAI!");
 
             var app = new Program()
-                          {
-                              Items = new List<Item>
+            {
+                Items = new List<Item>
                                           {
                                               new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
                                               new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
@@ -26,7 +27,7 @@ namespace GildedRose.Console
                                               new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
                                           }
 
-                          };
+            };
 
             app.UpdateQuality();
 
