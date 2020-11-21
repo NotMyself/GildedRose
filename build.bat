@@ -13,10 +13,9 @@ function Get-PackageDir() { ^
 	param([xml]$packagesXml, [string]$packagesDir, [string]$packageName); ^
 	ForEach ($package in $packagesXml.packages.package) { ^
 		if ($package.id -eq $packageName) { return Join-Path $packagesDir ($package.id + '.' + $package.version) } ^
-	} else { ^
-		Write-Host -ForegroundColor Red "ERROR: Cannot find '$packageName' package"; ^
-		exit 1; ^
-	}; ^
+	} ^
+	Write-Host -ForegroundColor Red "ERROR: Cannot find '$packageName' package"; ^
+	exit 1; ^
 }; ^
 
 function Test-LastExitCode { if ($LastExitCode -ne 0 -and $LastExitCode) { Write-Host "ExitCode: $LastExitCode" -ForegroundColor Red; exit $LastExitCode } }; ^
@@ -28,7 +27,7 @@ if (-not (Test-Path $NuGet)) { ^
 }; ^
 
 $PackagesDir = cmd /c "$NuGet" config RepositoryPath -AsPath; ^
-if ($PackagesDir -eq '"WARNING: Key ''RepositoryPath'' not found.'") { Write-Host -ForegroundColor Red "ERROR: Cannot find 'RepositoryPath' key in NuGet.config"; exit 1 }; ^
+if ($PackagesDir -eq "WARNING: Key 'RepositoryPath' not found.") { Write-Host -ForegroundColor Red "ERROR: Cannot find 'RepositoryPath' key in NuGet.config"; exit 1 }; ^
 
 $PackagesConfig = Join-Path $WorkingDir '.nuget\packages.config'; ^
 if (-not (Test-Path $PackagesConfig)) { Write-Host -ForegroundColor Red "ERROR: Cannot find solution 'packages.config'"; exit 1 }; ^
@@ -51,7 +50,7 @@ if (Test-Path $(Join-Path $WorkingDir ($BuildPackageName + '\Functions.psm1'))) 
 
 Import-Module "$Psake", "$Functions"; ^
 Write-Host 'Invoking psake' -ForegroundColor Cyan; ^
-Invoke-psake $(Join-Path $WorkingDir '.\tasks.ps1') %*; ^
+Invoke-psake $(Join-Path $WorkingDir '.\tasks.ps1'); ^
 
 if (($psake.build_success -eq $false) -and ($LastExitCode -eq 0 -or -not ($LastExitCode))) { $LastExitCode = 1 }; ^
 Test-LastExitCode;
