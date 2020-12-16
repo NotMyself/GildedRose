@@ -7,7 +7,7 @@ namespace GildedRose.Console
     /// </summary>
     public class Program
     {
-        List<Item> Items;
+        private IList<Item> _items;
         static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
@@ -33,6 +33,11 @@ namespace GildedRose.Console
 
             System.Console.ReadKey();
 
+        }
+        public IList<Item> Items
+        {
+            get { return _items; }
+            set { _items = value; }
         }
 
         /// <summary>
