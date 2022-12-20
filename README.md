@@ -55,7 +55,7 @@ start refactoring.
 ## Who, What, Why?
 Who: [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
 
-What & Why: [Refactor This: The Gilded Rose Kata](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/)
+What & Why: [Refactor This: The Gilded Rose Kata](https://iamnotmyself.com/refactor-this-the-gilded-rose-kata/)
 
 ## License
 
