@@ -46,11 +46,11 @@ Quality is 80 and it never alters.
 
 ## Getting Started
 
-Clone the repository. Run build.bat from Powershell. If you see 
+Clone the repository. Run  `dotnet test`. If you see 
 output similar to the following screenshot, you are ready to 
 start refactoring.
 
-![alt text](images/build_output.png "Good Build Output")
+![Test Run Successful. Total Tests: 1. Passed: 1 ](images/build_output.png "dotnet test output")
 
 ## Who, What, Why?
 Who: [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
