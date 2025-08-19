@@ -1,124 +1,55 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GildedRose.Console
 {
-    class Program
+    internal class Program
     {
-        IList<Item> Items;
         static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
 
-            var app = new Program()
-                          {
-                              Items = new List<Item>
-                                          {
-                                              new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                                              new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                                              new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
-                                              new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
-                                              new Item
-                                                  {
-                                                      Name = "Backstage passes to a TAFKAL80ETC concert",
-                                                      SellIn = 15,
-                                                      Quality = 20
-                                                  },
-                                              new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
-                                          }
-
-                          };
-
-            app.UpdateQuality();
-
-            System.Console.ReadKey();
-
-        }
-
-        public void UpdateQuality()
-        {
-            for (var i = 0; i < Items.Count; i++)
+            IList<Item> items = new List<Item>
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
+                new Item { Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20 },
+                new Item { Name = "Aged Brie", SellIn = 2, Quality = 0 },
+                new Item { Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7 },
+                new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 },
+                new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20 },
+                new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6 },
+            };
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
+            var app = new GildedRose(items);
 
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
+            // Print a clear table for several days.
+            const int totalDays = 5;
+            for (var day = 0; day < totalDays; day++)
+            {
+                System.Console.WriteLine("================= Day " + day + " =================");
+                System.Console.WriteLine(string.Format("{0,-45} {1,7} {2,7}", "Name", "SellIn", "Quality"));
+                System.Console.WriteLine(new string('-', 65));
+
+                foreach (var it in items)
+                {
+                    System.Console.WriteLine(string.Format("{0,-45} {1,7} {2,7}", it.Name, it.SellIn, it.Quality));
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
+                System.Console.WriteLine();
+                app.UpdateQuality();
 
-                if (Items[i].SellIn < 0)
+                // Demo convenience: automatically remove inventory that’s past sell-in AND worthless.
+                // Removes expired Backstage passes and junk that hit zero.
+                var list = items as List<Item>;
+                if (list != null)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    int removed = list.RemoveAll(i => i.SellIn < 0 && i.Quality == 0);
+                    if (removed > 0)
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        System.Console.WriteLine("Removed " + removed + " expired/valueless item(s).");
+                        System.Console.WriteLine();
                     }
                 }
             }
         }
-
     }
-
-    public class Item
-    {
-        public string Name { get; set; }
-
-        public int SellIn { get; set; }
-
-        public int Quality { get; set; }
-    }
-
 }
